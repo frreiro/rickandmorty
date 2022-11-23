@@ -1,13 +1,16 @@
 import React from 'react';
 import {PersonFill, GeoAltFill, TvFill} from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import { ICustomNavBar, IItemNav, INavState } from '../../interfaces/navbar';
 
 
 
 export default function CustomNavbar({navState}: ICustomNavBar){
+	const navigate = useNavigate();
 
 	function setNavChoice(type: INavState['navChoice']){
 		navState.setNavChoice(type);
+		navigate(`/dashboard/${type.toLowerCase()}`);
 	}
 
 	const itemNav: IItemNav[] = [{
@@ -31,7 +34,9 @@ export default function CustomNavbar({navState}: ICustomNavBar){
 				{
 					itemNav.map((item_nav) => {
 						return (
-							<div key={item_nav.name} className={`nav-icon ${navState.navChoice === item_nav.name ? 'text-dark' : ''}`} 
+							<div 
+								key={item_nav.name} 
+								className={`nav-icon ${navState.navChoice === item_nav.name ? 'text-dark' : ''}`} 
 								onClick={() => setNavChoice(item_nav.name)}>
 								{item_nav.icon}
 								<p className='body '>

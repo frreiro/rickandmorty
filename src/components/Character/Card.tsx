@@ -23,31 +23,30 @@ export default function CharacterCard({character}: {character: ICharacter}) {
 			</div>
 			<CardBody>
 				<CardTitle><strong>{character.name}</strong></CardTitle>
-				<p><small>location:</small></p>
 				<div>
-					
+					<p><small>location:</small></p>
 					<div className='icon-text location'>
 						<GeoAltFill className='icon'/>
 						<p className='text-muted'><small>{character.location.name}</small></p>
 					</div>
-					<section>
-						<div>
-							<p><small>status:</small></p>
-							<div className='icon-text'>
-								{setStatusIcon(character.status)?.element}
-								{/*<X className='icon'/>*/}
-								<p className={setStatusIcon(character.status)?.class}><small>{character.status}</small></p>
-							</div>
-						</div>
-						<div>
-							<p><small>specie:</small></p>
-							<div className='icon-text'>
-								<UniversalAccessCircle className='icon'/>
-								<p className='text-muted'><small>{character.species}</small></p>
-							</div>
-						</div>
-					</section>
 				</div>
+				<section>
+					<div>
+						<p><small>status:</small></p>
+						<div className='icon-text'>
+							{setStatusIcon(character.status)?.element}
+							{/*<X className='icon'/>*/}
+							<p className={setStatusIcon(character.status)?.class}><small>{character.status}</small></p>
+						</div>
+					</div>
+					<div>
+						<p><small>specie:</small></p>
+						<div className='icon-text'>
+							<UniversalAccessCircle className='icon'/>
+							<p className='text-muted'><small>{character.species}</small></p>
+						</div>
+					</div>
+				</section>
 			</CardBody>
 		</Card>
 	);

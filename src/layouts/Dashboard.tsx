@@ -1,13 +1,16 @@
-import React, { PropsWithChildren, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
+import React, { PropsWithChildren, useState } from 'react';
+
+
 import { INavChoice } from '../interfaces/navbar';
 import ListContainer from '../components/ListContainer';
 import CustomNavbar from '../components/Dashboard/navbar';
 
 
-export default function Dashboard({children}: PropsWithChildren){
+export default function Dashboard(){
 	const [navChoice, setNavChoice] = useState<INavChoice>('Characters');
-
+	
 
 	return (
 		<main className='app-container'>
@@ -18,7 +21,7 @@ export default function Dashboard({children}: PropsWithChildren){
 				<CardBody className='dashboard-body'>
 					<CardTitle tag="h1">{navChoice}</CardTitle>
 					<ListContainer>
-						{children}
+						<Outlet/>
 					</ListContainer>
 				</CardBody>
 			</Card>	

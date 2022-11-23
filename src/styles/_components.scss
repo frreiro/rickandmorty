@@ -33,13 +33,25 @@
 	overflow: scroll;
 }
 
+
+.icon-text{
+	display: flex;
+	align-items: center;
+
+	.icon{
+		width: 16px;
+		height: 16px;
+		margin-right: 5px;
+	}
+}
+
 .card-character{
 	width: 200px;
 	height: 300px;
 	margin-right: 10px;
 	margin-bottom: 20px;
 	//padding-top: 10px;
-	position: relative;
+	//position: relative;
 
 	.img{
 		width: 100%;
@@ -49,34 +61,39 @@
 		border-radius: 5px;
 	}
 
-	.location{
-		width: 100%;
-		word-wrap: break-word;
-		p{
-			width: 90%;
-
-		}
+	P{
+		width: 90%;
+		line-height: 15px;
 	}
 
-	.icon-text{
+	.card-body{
 		display: flex;
-		align-items: center;
-
-		.icon{
-			width: 16px;
-			height: 16px;
-			margin-right: 5px;
-		}
+		flex-direction: column;
+		justify-content: space-between;
 	}
 
 	section{
-		position: absolute;
-		bottom:10px;
 		display: flex;
-
-		div:first-of-type{
-			margin-right: 10px;
-		}
+		justify-content: space-between;
 	}
 
+}
+
+
+.card-location{
+	width: 200px;
+	height: 192px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+
+	P{
+		width: 90%;
+		line-height: 15px;
+	}
+
+	.card-body{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
 }
