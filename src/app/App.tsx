@@ -5,9 +5,7 @@ import {
 	BrowserRouter,
 	Routes,
 	Route,
-	Navigate
 } from 'react-router-dom';
-import { Router } from 'react-bootstrap-icons';
 import CharacterCard from '../pages/CharacterCard';
 
 

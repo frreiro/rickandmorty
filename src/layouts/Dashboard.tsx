@@ -15,7 +15,7 @@ export default function Dashboard({children}: PropsWithChildren){
 				body
 				className='dashboard-container'>
 				<CustomNavbar navState={{navChoice, setNavChoice}}/>
-				<CardBody>
+				<CardBody className='dashboard-body'>
 					<CardTitle tag="h1">{navChoice}</CardTitle>
 					<ListContainer>
 						{children}
