@@ -27,19 +27,35 @@
 .container-list{
 	height: 90%;
 	display: flex;
+	justify-content: center;
+	padding-top: 10px;
 	flex-wrap: wrap;
 	overflow: scroll;
 }
 
 .card-character{
-	width: 180px;
-	height: 250px;
+	width: 200px;
+	height: 300px;
 	margin-right: 10px;
 	margin-bottom: 20px;
+	//padding-top: 10px;
+	position: relative;
 
-	img{
+	.img{
 		width: 100%;
-		height: 100px;
+		height: 110px;
+		background-position: center 30%;
+		background-size: cover;
+		border-radius: 5px;
+	}
+
+	.location{
+		width: 100%;
+		word-wrap: break-word;
+		p{
+			width: 90%;
+
+		}
 	}
 
 	.icon-text{
@@ -54,6 +70,8 @@
 	}
 
 	section{
+		position: absolute;
+		bottom:10px;
 		display: flex;
 
 		div:first-of-type{
