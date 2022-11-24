@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { GeoAltFill, UniversalAccessCircle, XLg, CheckLg, QuestionLg, GenderAmbiguous, Globe } from 'react-bootstrap-icons';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardBody, CardTitle } from 'reactstrap';
-import { ICharacter, ICharactersDimensionData } from '../../interfaces/Character/character';
 import 'chart.js/auto';
 import { Pie } from 'react-chartjs-2';
-import { ICharacterFilters } from '../../interfaces/Character/request';
-import {  getCharacters } from '../../services/charactes.api';
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardTitle } from 'reactstrap';
+import { GeoAltFill, UniversalAccessCircle, XLg, CheckLg, QuestionLg, GenderAmbiguous, Globe } from 'react-bootstrap-icons';
 
-//const options = {
-//	legend:{
-//		display: false
-//	}
-//};
-//export const dataPie = {
-//	labels: ['Dead', 'Alive', 'Unknow'],
-//	datasets: [
-//		{
-//			data: [12, 19, 3],
-//			backgroundColor: [
-//				'red',
-//				'gray',
-//				'green',
-//			],
-//		},
-//	],
-//};
+
+import {  getCharacters } from '../../services/charactes.api';
+import { ICharacterFilters } from '../../interfaces/Character/request';
+import { ICharacter, ICharactersDimensionData } from '../../interfaces/Character/character';
 
 
 export default function CharacterDetails({character}: {character: ICharacter}) {
-	const [allDimensions, setAllDimensions] = useState({} as ICharactersDimensionData );
+	const [allDimensions, setAllDimensions] = useState({
+		alive: 0,
+		dead: 0,
+		unknown: 0
+	} as ICharactersDimensionData );
 
 
 	const dataPie = {
@@ -46,7 +32,7 @@ export default function CharacterDetails({character}: {character: ICharacter}) {
 		],
 	};
 	
-
+	console.log(allDimensions);
 
 	useEffect(()=> {
 
@@ -58,9 +44,13 @@ export default function CharacterDetails({character}: {character: ICharacter}) {
 			const newObject = {} as ICharactersDimensionData;
 			for(const item of statusfilters){
 				filter.status = item;
-				const charactersData = await getCharacters(filter);
-				newObject[item] = charactersData.info.count;
-				setAllDimensions({...allDimensions, ...newObject});
+				try{
+					const charactersData = await getCharacters(filter);
+					newObject[item] = charactersData.info.count;
+					setAllDimensions({...allDimensions, ...newObject});
+				}catch(e){
+					continue;
+				}
 			}
 		})();
 
