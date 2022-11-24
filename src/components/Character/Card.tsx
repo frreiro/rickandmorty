@@ -16,37 +16,37 @@ export default function CharacterCard({character}: {character: ICharacter}) {
 
 	return (
 		<Card
-			className='card-character'>
+			className='custom-card card-character'>
 			<div className='img' style={{
 				backgroundImage: `url(${character.image})`
 			}}>
 			</div>
 			<CardBody>
 				<CardTitle><strong>{character.name}</strong></CardTitle>
-				<div>
+				<section>
 					<p><small>location:</small></p>
 					<div className='icon-text location'>
 						<GeoAltFill className='icon'/>
 						<p className='text-muted'><small>{character.location.name}</small></p>
 					</div>
-				</div>
-				<section>
-					<div>
+				</section>
+				<article>
+					<section>
 						<p><small>status:</small></p>
 						<div className='icon-text'>
 							{setStatusIcon(character.status)?.element}
 							{/*<X className='icon'/>*/}
 							<p className={setStatusIcon(character.status)?.class}><small>{character.status}</small></p>
 						</div>
-					</div>
-					<div>
+					</section>
+					<section>
 						<p><small>specie:</small></p>
 						<div className='icon-text'>
 							<UniversalAccessCircle className='icon'/>
 							<p className='text-muted'><small>{character.species}</small></p>
 						</div>
-					</div>
-				</section>
+					</section>
+				</article>
 			</CardBody>
 		</Card>
 	);

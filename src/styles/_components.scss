@@ -45,13 +45,34 @@
 	}
 }
 
-.card-character{
+
+.custom-card{
 	width: 200px;
-	height: 300px;
+	height: 200px;
 	margin-right: 10px;
 	margin-bottom: 20px;
-	//padding-top: 10px;
-	//position: relative;
+	cursor: pointer;
+
+	article{
+		display: flex;
+		justify-content: space-between;
+	}
+
+	P{
+		line-height: 15px;
+	}
+
+	section{
+		:first-child{
+			margin-bottom: 3px;
+		}
+	}
+
+}
+
+
+.card-character{
+	height: 300px;
 
 	.img{
 		width: 100%;
@@ -63,7 +84,6 @@
 
 	P{
 		width: 90%;
-		line-height: 15px;
 	}
 
 	.card-body{
@@ -72,23 +92,15 @@
 		justify-content: space-between;
 	}
 
-	section{
-		display: flex;
-		justify-content: space-between;
-	}
+	
 
 }
 
 
 .card-location{
-	width: 200px;
-	height: 192px;
-	margin-right: 10px;
-	margin-bottom: 20px;
 
 	P{
 		width: 90%;
-		line-height: 15px;
 	}
 
 	.card-body{
@@ -97,3 +109,13 @@
 		justify-content: space-between;
 	}
 }
+
+.card-episode{
+
+	.card-body{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+}
+
