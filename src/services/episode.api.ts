@@ -7,6 +7,13 @@ async function getEpisode(): Promise<{info: IInfo, results:IEpisode[]}> {
 	return response.data;
 }
 
+async function getEpisodeByNumbers(episodes: number[]): Promise<IEpisode[]> {
+	const response = await fetchAxios.get(`/episode/${episodes}`);
+	return response.data;
+}
+
+
 export{
-	getEpisode
+	getEpisode,
+	getEpisodeByNumbers
 };

@@ -10,6 +10,8 @@ import {
 import Characters from '../pages/CharacterCard';
 import Locations from '../pages/LocationsCard';
 import Episodes from '../pages/EpisodesCard';
+import CharacterDetails from '../components/Character/Details';
+import Character from '../pages/Character/Character';
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
 			<Routes>
 				<Route path='/dashboard' element={<Dashboard/>}>
 					<Route path='characters' element={<Characters/>}/>
+					<Route path='characters/:id' element={<Character/>}/>
+
 					<Route path='locations' element={<Locations/>}/>
 					<Route path='episodes' element={<Episodes/>}/>
 

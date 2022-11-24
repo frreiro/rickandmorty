@@ -17,7 +17,7 @@ export default function CharacterCard({character}: {character: ICharacter}) {
 
 	return (
 		<Card
-			onClick={() => navigate(`/dashboard/characters?name=${character.name.split(' ')[0]}`)}
+			onClick={() => navigate(`/dashboard/characters/${character.id}`)}
 			className='custom-card card-character'>
 			<div className='img' style={{
 				backgroundImage: `url(${character.image})`
@@ -37,7 +37,6 @@ export default function CharacterCard({character}: {character: ICharacter}) {
 						<p><small>status:</small></p>
 						<div className='icon-text'>
 							{setStatusIcon(character.status)?.element}
-							{/*<X className='icon'/>*/}
 							<p className={setStatusIcon(character.status)?.class}><small>{character.status}</small></p>
 						</div>
 					</section>

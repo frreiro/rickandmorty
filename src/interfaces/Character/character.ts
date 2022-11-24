@@ -12,7 +12,12 @@ export interface ICharacter{
 	origin: IPlace
 	location: IPlace
 	image: string;
-	eppisode: [];
+	episode: string[];
 	url: string;
 	created: string;
+}
+export interface ICharactersDimensionData{
+	alive: number,
+	dead:number,
+	unknown: number
 }

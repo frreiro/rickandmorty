@@ -1,6 +1,6 @@
 export interface IInfo{
 	count: number;
 	pages: number;
-	next: string;
-	prev: number | null;
+	next: string | null;
+	prev: string | null;
 }

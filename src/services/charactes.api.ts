@@ -14,15 +14,26 @@ async function getCharacters(filter?:ICharacterFilters): Promise<{info: IInfo, r
 
 
 
-async function getSpecificCharacterAllDimensions(name : ICharacter['name']): Promise<{info: IInfo, results:ICharacter[]}> {
-	const response = await fetchAxios.get(`/character?name=${name}`);
+async function getSpecificCharacter(id : ICharacter['id']): Promise<ICharacter> {
+	const response = await fetchAxios.get(`/character/${id}`);
+	return response.data;
+}
+
+
+async function getCharacterNextPage( URL: string ): Promise<{info: IInfo, results:ICharacter[]}> {
+	const response = await fetchAxios.get(`/character${URL}`);
+
 	return response.data;
 }
 
 
 
 
+
+
+
 export{
 	getCharacters,
-	getSpecificCharacterAllDimensions
+	getSpecificCharacter,
+	getCharacterNextPage
 };

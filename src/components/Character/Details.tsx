@@ -1,0 +1,134 @@
+import React, { useEffect, useState } from 'react';
+import { GeoAltFill, UniversalAccessCircle, XLg, CheckLg, QuestionLg, GenderAmbiguous, Globe } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardBody, CardTitle } from 'reactstrap';
+import { ICharacter, ICharactersDimensionData } from '../../interfaces/Character/character';
+import 'chart.js/auto';
+import { Pie } from 'react-chartjs-2';
+import { ICharacterFilters } from '../../interfaces/Character/request';
+import {  getCharacters } from '../../services/charactes.api';
+
+//const options = {
+//	legend:{
+//		display: false
+//	}
+//};
+//export const dataPie = {
+//	labels: ['Dead', 'Alive', 'Unknow'],
+//	datasets: [
+//		{
+//			data: [12, 19, 3],
+//			backgroundColor: [
+//				'red',
+//				'gray',
+//				'green',
+//			],
+//		},
+//	],
+//};
+
+
+export default function CharacterDetails({character}: {character: ICharacter}) {
+	const [allDimensions, setAllDimensions] = useState({} as ICharactersDimensionData );
+
+
+	const dataPie = {
+		labels: ['Dead', 'Alive', 'Unknow'],
+		datasets: [
+			{
+				data: [allDimensions.dead, allDimensions.alive, allDimensions.unknown],
+				backgroundColor: [
+					'red',
+					'green',
+					'gray',
+				],
+			},
+		],
+	};
+	
+
+
+	useEffect(()=> {
+
+		const statusfilters: Lowercase<ICharacter['status']>[] = ['alive', 'dead', 'unknown'] ;
+		const filter = {} as ICharacterFilters;
+		filter.name = character.name.split(' ')[0];
+
+		(async () => {
+			const newObject = {} as ICharactersDimensionData;
+			for(const item of statusfilters){
+				filter.status = item;
+				const charactersData = await getCharacters(filter);
+				newObject[item] = charactersData.info.count;
+				setAllDimensions({...allDimensions, ...newObject});
+			}
+		})();
+
+	}, []);
+
+
+	function setStatusIcon(status: ICharacter['status']){
+		if(status === 'Alive') return {element: <CheckLg className='icon text-success'/>, class: 'text-success'};
+		if(status === 'Dead') return {element: <XLg className='icon text-danger'/>, class: 'text-danger'};
+		if(status === 'unknown') return {element: <QuestionLg className='icon text-warning'/>, class:	'text-warning'};
+	}
+
+	
+	return (
+		<Card
+			className='custom-card card-detail'>
+			<img src={character.image}/>
+			<CardBody>
+				<section>
+					<CardTitle tag='h4'>{character.name}</CardTitle>
+					<div className='icon-text'>
+						<GeoAltFill className='icon'/>
+						<p><small>location:</small></p>
+						<p className='text-muted'><small>{character.location.name}</small></p>
+					</div>
+					<div className='icon-text'>
+						{setStatusIcon(character.status)?.element}
+						<p><small>status:</small></p>
+						<p className={setStatusIcon(character.status)?.class}><small>{character.status}</small></p>
+					</div>
+					<div className='icon-text'>
+						<UniversalAccessCircle className='icon'/>
+						<p><small>specie:</small></p>
+						<p className='text-muted'><small>{character.species}</small></p>
+					</div>
+					<div className='icon-text'>
+						<Globe className='icon'/>
+						<p><small>origin:</small></p>
+						<p className='text-muted'><small>{character.origin.name}</small></p>
+					</div>
+					<div className='icon-text'>
+						<GenderAmbiguous className='icon'/>
+						<p><small>gender:</small></p>
+						<p className='text-muted'><small>{character.gender}</small></p>
+					</div>
+				</section>
+
+				<div className='chart-container'>
+					<CardTitle tag='h5' >Other dimensions</CardTitle>
+					<div className='chart'>
+						<Pie data={dataPie} 
+							options={{
+								maintainAspectRatio: false, 
+								plugins: {
+									legend: {
+										position:'bottom',
+										labels: {
+											usePointStyle: true,
+											boxHeight: 7,
+										}		
+									}
+								}
+							}}
+						/>
+					</div>
+					
+				</div>
+			</CardBody>
+		</Card>
+	);
+}

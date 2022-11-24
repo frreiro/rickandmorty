@@ -17,6 +17,7 @@ export default function Characters() {
 	const query = useQuery();
 	const page = query.get('page');
 
+
 	useEffect(() => {
 		const filter = {} as ICharacterFilters;
 		if(page){
@@ -34,6 +35,7 @@ export default function Characters() {
 
 	return (
 		<>
+			
 			{
 				characters?.map((character) => {
 					return <CharacterCard 
