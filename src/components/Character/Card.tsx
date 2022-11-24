@@ -1,10 +1,11 @@
 import React from 'react';
 import { GeoAltFill, UniversalAccessCircle, XLg, CheckLg, QuestionLg } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { ICharacter } from '../../interfaces/Character/character';
 
 export default function CharacterCard({character}: {character: ICharacter}) {
-
+	const navigate = useNavigate();
 
 	function setStatusIcon(status: ICharacter['status']){
 		if(status === 'Alive') return {element: <CheckLg className='icon text-success'/>, class: 'text-success'};
@@ -16,6 +17,7 @@ export default function CharacterCard({character}: {character: ICharacter}) {
 
 	return (
 		<Card
+			onClick={() => navigate(`/dashboard/characters?name=${character.name.split(' ')[0]}`)}
 			className='custom-card card-character'>
 			<div className='img' style={{
 				backgroundImage: `url(${character.image})`
