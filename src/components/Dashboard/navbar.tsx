@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {PersonFill, GeoAltFill, TvFill} from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import DashboardContext from '../../context/DashboardContext';
-import {  IItemNav, INavChoice } from '../../interfaces/navbar';
+import {  IItemNav } from '../../interfaces/navbar';
 
 
 

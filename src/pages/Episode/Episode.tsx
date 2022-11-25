@@ -88,6 +88,7 @@ export default function Episode() {
 							:
 							Object.keys(locations).length > 1 ?
 								locations?.map((location) => {
+									if(location.id === 0) return null;
 									return <LocationCard 
 										key={location.id}
 										location={location}

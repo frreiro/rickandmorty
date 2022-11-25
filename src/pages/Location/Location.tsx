@@ -18,10 +18,9 @@ import { getSpecificLocation } from '../../services/location.api';
 export default function Location() {
 	const [location, setLocation] = useState<ILocation>({} as ILocation);
 	const [characters, setCharacters] = useState<ICharacter[]>([] as ICharacter[]);
+	const [episodes, setEpisodes] = useState<IEpisode[]>([] as IEpisode[]);
 	const [list, setList] = useState<'Residents'| 'Episodes'>('Residents');
 	
-	const [episodes, setEpisodes] = useState<IEpisode[]>([] as IEpisode[]);
-	//TODO: episodes
 	
 	const {id} = useParams();
 	
@@ -88,7 +87,8 @@ export default function Location() {
 										character={character}
 									/>;
 								})
-								: <></>
+								: 
+								<></>
 
 							: 
 							Object.keys(episodes).length > 0 ?

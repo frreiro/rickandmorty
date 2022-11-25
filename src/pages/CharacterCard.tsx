@@ -26,7 +26,6 @@ export default function Characters() {
 		(async() => {
 			const charactersData = await getCharacters(filter);
 			pages.current = charactersData.info.pages;
-			console.log(charactersData.results);
 			setCharacters(charactersData.results);
 		})();
 
