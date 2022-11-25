@@ -32,7 +32,6 @@ export default function CharacterDetails({character}: {character: ICharacter}) {
 		],
 	};
 	
-	console.log(allDimensions);
 
 	useEffect(()=> {
 

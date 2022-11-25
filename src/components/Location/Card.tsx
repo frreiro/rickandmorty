@@ -1,13 +1,16 @@
 import React from 'react';
 import { GeoAltFill, Hypnotize, Asterisk} from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { ILocation } from '../../interfaces/Location/Location';
 
 export default function LocationCard({location}: {location: ILocation}) {
-
+	const navigate = useNavigate();
+	
 
 	return (
 		<Card
+			onClick={() => navigate(`/dashboard/locations/${location.id}`)}
 			className='custom-card card-location'>
 			<CardBody>
 				<CardTitle><strong>{location.name}</strong></CardTitle>

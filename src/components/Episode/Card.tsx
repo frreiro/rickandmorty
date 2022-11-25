@@ -1,14 +1,17 @@
 import React from 'react';
 import { TvFill, Calendar, PersonFill} from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { IEpisode } from '../../interfaces/Episode/Episode';
 
 export default function EpisodeCard({episode}: {episode: IEpisode}) {
+	const navigate = useNavigate();
 
 
 
 	return (
 		<Card
+			onClick={() => navigate(`/dashboard/episodes/${episode.id}`)}
 			className='custom-card card-episode'>
 			<CardBody>
 				<CardTitle><strong>{episode.name}</strong></CardTitle>

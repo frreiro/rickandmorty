@@ -12,8 +12,12 @@ async function getEpisodeByNumbers(episodes: number[]): Promise<IEpisode[]> {
 	return response.data;
 }
 
-
+async function getSpecificEpisode(id : IEpisode['id']): Promise<IEpisode> {
+	const response = await fetchAxios.get(`/episode/${id}`);
+	return response.data;
+}
 export{
 	getEpisode,
-	getEpisodeByNumbers
+	getEpisodeByNumbers,
+	getSpecificEpisode
 };

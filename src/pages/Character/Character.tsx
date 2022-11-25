@@ -52,18 +52,20 @@ export default function Character() {
 					:
 					<></>
 			}
-			<h3>Episodes</h3>
-			<div className='container-list'>
-				{
-					Object.keys(episodes).length > 1 ?
-						episodes?.map((episode) => {
-							return <EpisodeCard 
-								key={episode.id}
-								episode={episode}
-							/>;
-						})
-						: <></>
-				}
+			<div className='list-detail'>
+				<h3>Episodes:</h3>
+				<div className='list'>
+					{
+						Object.keys(episodes).length > 1 ?
+							episodes?.map((episode) => {
+								return <EpisodeCard 
+									key={episode.id}
+									episode={episode}
+								/>;
+							})
+							: <></>
+					}
+				</div>
 			</div>
 		</>
 	);

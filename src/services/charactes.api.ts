@@ -13,6 +13,12 @@ async function getCharacters(filter?:ICharacterFilters): Promise<{info: IInfo, r
 }
 
 
+async function getCharacterByNumbers(characters: number[]): Promise<ICharacter[]> {
+	const response = await fetchAxios.get(`/character/${characters}`);
+	return response.data;
+}
+
+
 
 async function getSpecificCharacter(id : ICharacter['id']): Promise<ICharacter> {
 	const response = await fetchAxios.get(`/character/${id}`);
@@ -35,5 +41,6 @@ async function getCharacterNextPage( URL: string ): Promise<{info: IInfo, result
 export{
 	getCharacters,
 	getSpecificCharacter,
-	getCharacterNextPage
+	getCharacterNextPage,
+	getCharacterByNumbers
 };

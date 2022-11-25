@@ -141,3 +141,16 @@
 			
 	}
 }
+
+
+.list-detail{
+	width: 100%;
+
+	.list{
+		width: 100%;
+		display: flex;;
+		flex-wrap: wrap;
+		margin-top: 10px;
+		justify-content: space-between
+	}
+}

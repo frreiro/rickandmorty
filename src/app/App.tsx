@@ -12,6 +12,8 @@ import Locations from '../pages/LocationsCard';
 import Episodes from '../pages/EpisodesCard';
 import CharacterDetails from '../components/Character/Details';
 import Character from '../pages/Character/Character';
+import Location from '../pages/Location/Location';
+import Episode from '../pages/Episode/Episode';
 
 
 function App() {
@@ -23,7 +25,11 @@ function App() {
 					<Route path='characters/:id' element={<Character/>}/>
 
 					<Route path='locations' element={<Locations/>}/>
+					<Route path='locations/:id' element={<Location/>}/>
+
 					<Route path='episodes' element={<Episodes/>}/>
+					<Route path='episodes/:id' element={<Episode/>}/>
+
 
 				</Route>
 				<Route path='*' element={<Navigate to='/dashboard/characters'/>}/>
