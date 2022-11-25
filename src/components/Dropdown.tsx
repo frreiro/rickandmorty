@@ -19,12 +19,12 @@ export default function DropDownComponent({setValue, value, texts}: {setValue: a
 					{
 						texts.map((text,index) => {
 							return (
-								<>
-									<DropdownItem onClick={() => setValue(text)}>{text}</DropdownItem>
+								<React.Fragment key={index}>
+									<DropdownItem  onClick={() => setValue(text)}>{text}</DropdownItem>
 									{
 										index !== texts.length - 1 ? <DropdownItem divider /> : <></> 
 									}
-								</>
+								</React.Fragment>
 
 							);
 						

@@ -13,7 +13,7 @@ async function getCharacters(filter?:ICharacterFilters): Promise<{info: IInfo, r
 }
 
 
-async function getCharacterByNumbers(characters: number[]): Promise<ICharacter[]> {
+async function getCharacterByNumbers(characters: number[]): Promise<ICharacter[] | ICharacter> {
 	const response = await fetchAxios.get(`/character/${characters}`);
 	return response.data;
 }

@@ -37,7 +37,11 @@ export default function Character() {
 			const episodesNumbers = character.episode.map((episode) => Number(episode.split('/').at(-1)));
 			(async() => {
 				const episodesData = await getEpisodeByNumbers(episodesNumbers);
-				setEpisodes(episodesData);
+				if(Array.isArray(episodesData)){
+					setEpisodes([...episodesData]);
+				}else{
+					setEpisodes([episodesData]);
+				}
 			})();
 		}
 	},[character]);

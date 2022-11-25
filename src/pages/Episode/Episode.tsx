@@ -18,7 +18,7 @@ import { getLocationsByNumbers } from '../../services/location.api';
 
 export default function Episode() {
 	const [episode, setEpisode] = useState<IEpisode>({} as IEpisode);
-	const [characters, setCharaters] = useState<ICharacter[]>({} as ICharacter[]);
+	const [characters, setCharacters] = useState<ICharacter[]>({} as ICharacter[]);
 	const [locations, setLocations] = useState<ILocation[]>({} as ILocation[]);
 	const [list, setList] = useState<'Characters'| 'Locations'>('Characters');
 	
@@ -39,7 +39,11 @@ export default function Episode() {
 			const charactersNumbers = episode.characters.map((character) => Number(character.split('/').at(-1)));
 			(async() => {
 				const charactersData = await getCharacterByNumbers(charactersNumbers);
-				setCharaters(charactersData);
+				if(Array.isArray(charactersData)){
+					setCharacters([...charactersData]);
+				}else{
+					setCharacters([charactersData]);
+				}
 			})();
 		}
 	},[episode]);

@@ -1,61 +1,58 @@
 import 'chart.js/auto';
-import { Pie } from 'react-chartjs-2';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { PersonCircle, Bullseye, GlobeAmericas } from 'react-bootstrap-icons';
+import { Bar } from 'react-chartjs-2';
 
 
-import {  getCharacters } from '../../services/charactes.api';
 import { ICharacterFilters } from '../../interfaces/Character/request';
-import { ICharacter, ICharactersDimensionData } from '../../interfaces/Character/character';
 import { ILocation } from '../../interfaces/Location/Location';
+import { getLocations } from '../../services/location.api';
 
 
 export default function LocationDetails({location}: {location: ILocation}) {
-	//const [allDimensions, setAllDimensions] = useState({
-	//	alive: 0,
-	//	dead: 0,
-	//	unknown: 0
-	//} as ICharactersDimensionData );
+	const [locationDimensions, setLocationDimensions] = useState({} as ILocation[]);
+	const page = useRef({
+		current: 1,
+		total: 1
+	});
+
+	const filter = {} as ICharacterFilters;
+	filter.name = location.name?.split(' ').at(0);
 
 
-	//const dataPie = {
-	//	labels: ['Dead', 'Alive', 'Unknow'],
-	//	datasets: [
-	//		{
-	//			data: [allDimensions.dead, allDimensions.alive, allDimensions.unknown],
-	//			backgroundColor: [
-	//				'red',
-	//				'green',
-	//				'gray',
-	//			],
-	//		},
-	//	],
-	//};
+	useEffect(() => {
+		(async() => {
+			const dimensions = await getLocations(filter);
+			page.current.total = dimensions.info.pages;
+			setLocationDimensions(dimensions.results);
+			page.current.current = page.current.current + 1; 
+		})();
+	},[]);
+
 	
-	//console.log(allDimensions);
+	
+	useEffect(() => {
+		
+		if(page.current.total >= page.current.current){
+			filter.page = page.current.current;
+			(async() => {
+				const dimensions = await getLocations(filter);
+				setLocationDimensions([...locationDimensions, ...dimensions.results]);
+				page.current.current = page.current.current + 1; 
+			})();
 
-	//useEffect(()=> {
+		}
+	},[page.current.current]);
 
-	//	const statusfilters: Lowercase<ICharacter['status']>[] = ['alive', 'dead', 'unknown'] ;
-	//	const filter = {} as ICharacterFilters;
-	//	filter.name = character.name.split(' ')[0];
 
-	//	(async () => {
-	//		const newObject = {} as ICharactersDimensionData;
-	//		for(const item of statusfilters){
-	//			filter.status = item;
-	//			try{
-	//				const charactersData = await getCharacters(filter);
-	//				newObject[item] = charactersData.info.count;
-	//				setAllDimensions({...allDimensions, ...newObject});
-	//			}catch(e){
-	//				continue;
-	//			}
-	//		}
-	//	})();
 
-	//}, []);
+
+
+
+
+
+
 
 
 	
@@ -82,26 +79,74 @@ export default function LocationDetails({location}: {location: ILocation}) {
 					</div>
 				</section>
 
-				{/*<div className='chart-container'>
-					<CardTitle tag='h5' >Other dimensions</CardTitle>
+				<div className='chart-container'>
+					<CardTitle tag='h5' >Residents per dimensions</CardTitle>
 					<div className='chart'>
-						<Pie data={dataPie} 
-							options={{
-								maintainAspectRatio: false, 
-								plugins: {
-									legend: {
-										position:'bottom',
-										labels: {
-											usePointStyle: true,
-											boxHeight: 7,
+						{
+							locationDimensions.length > 0 ? 
+
+								<Bar data={{
+									labels: locationDimensions?.map((location) => {
+										if(location.residents.length > 0){
+											return location.name;
+										}
+									}),
+									datasets: [
+										{
+											data:  locationDimensions?.map((location) => {
+												if(location.residents.length > 0){
+													return location.residents.length;
+												}
+											}),
+											backgroundColor: locationDimensions?.map( () => '#7749F8' ),
+										},
+									],
+								}} 
+								options={{
+									maintainAspectRatio: false, 
+									plugins: {
+										legend: {
+											display: false,
 										}		
-									}
-								}
-							}}
-						/>
+									},
+									indexAxis: 'y',
+									scales: {
+										x: {
+											stacked: true,
+											type: locationDimensions?.reduce((lValue, location) => location.residents.length > lValue ? location.residents.length : lValue  , -Infinity) > 100 ? 'logarithmic' : 'linear', 
+											ticks: {
+												
+												
+												font: {
+													size: 8
+												},
+												callback(tickValue, index, ticks) {
+													if( Number(tickValue) % 1 === 0 ) return tickValue;
+												},	
+												
+											}
+
+										},
+										y:{
+											beginAtZero: true,
+											ticks: {
+
+												font: {
+													size: 8,
+													
+												},
+												
+											},
+										}
+									},
+								}}
+								/>
+
+								: <></>
+						}
 					</div>
 					
-				</div>*/}
+				</div>
 			</CardBody>
 		</Card>
 	);
