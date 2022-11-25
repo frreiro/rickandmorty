@@ -14,28 +14,31 @@ import CharacterDetails from '../components/Character/Details';
 import Character from '../pages/Character/Character';
 import Location from '../pages/Location/Location';
 import Episode from '../pages/Episode/Episode';
+import { DashboardProvider } from '../context/DashboardContext';
 
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path='/dashboard' element={<Dashboard/>}>
-					<Route path='characters' element={<Characters/>}/>
-					<Route path='characters/:id' element={<Character/>}/>
+		<DashboardProvider>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/dashboard' element={<Dashboard/>}>
+						<Route path='characters' element={<Characters/>}/>
+						<Route path='characters/:id' element={<Character/>}/>
 
-					<Route path='locations' element={<Locations/>}/>
-					<Route path='locations/:id' element={<Location/>}/>
+						<Route path='locations' element={<Locations/>}/>
+						<Route path='locations/:id' element={<Location/>}/>
 
-					<Route path='episodes' element={<Episodes/>}/>
-					<Route path='episodes/:id' element={<Episode/>}/>
+						<Route path='episodes' element={<Episodes/>}/>
+						<Route path='episodes/:id' element={<Episode/>}/>
 
 
-				</Route>
-				<Route path='*' element={<Navigate to='/dashboard/characters'/>}/>
+					</Route>
+					<Route path='*' element={<Navigate to='/dashboard/characters'/>}/>
 
-			</Routes>
-		</BrowserRouter>		
+				</Routes>
+			</BrowserRouter>		
+		</DashboardProvider>
 
 	);
 }

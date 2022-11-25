@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GeoAltFill, UniversalAccessCircle, XLg, CheckLg, QuestionLg } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
+import DashboardContext from '../../context/DashboardContext';
 import { ICharacter } from '../../interfaces/Character/character';
 
 export default function CharacterCard({character}: {character: ICharacter}) {
 	const navigate = useNavigate();
+	const {setType} = useContext(DashboardContext);
 
 	function setStatusIcon(status: ICharacter['status']){
 		if(status === 'Alive') return {element: <CheckLg className='icon text-success'/>, class: 'text-success'};
@@ -13,11 +15,17 @@ export default function CharacterCard({character}: {character: ICharacter}) {
 		if(status === 'unknown') return {element: <QuestionLg className='icon text-warning'/>, class:	'text-warning'};
 	}
 	
-
+	function clickCard(){
+		setType({
+			text: 'Character',
+			id: 1
+		});
+		navigate(`/dashboard/characters/${character.id}`);
+	}
 
 	return (
 		<Card
-			onClick={() => navigate(`/dashboard/characters/${character.id}`)}
+			onClick={clickCard}
 			className='custom-card card-character'>
 			<div className='img' style={{
 				backgroundImage: `url(${character.image})`

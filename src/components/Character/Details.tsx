@@ -72,27 +72,27 @@ export default function CharacterDetails({character}: {character: ICharacter}) {
 					<CardTitle tag='h4'>{character.name}</CardTitle>
 					<div className='icon-text'>
 						<GeoAltFill className='icon'/>
-						<p><small>location:</small></p>
+						<h6>location:</h6>
 						<p className='text-muted'><small>{character.location.name}</small></p>
 					</div>
 					<div className='icon-text'>
 						{setStatusIcon(character.status)?.element}
-						<p><small>status:</small></p>
+						<h6>status:</h6>
 						<p className={setStatusIcon(character.status)?.class}><small>{character.status}</small></p>
 					</div>
 					<div className='icon-text'>
 						<UniversalAccessCircle className='icon'/>
-						<p><small>specie:</small></p>
+						<h6>specie:</h6>
 						<p className='text-muted'><small>{character.species}</small></p>
 					</div>
 					<div className='icon-text'>
 						<Globe className='icon'/>
-						<p><small>origin:</small></p>
+						<h6>origin:</h6>
 						<p className='text-muted'><small>{character.origin.name}</small></p>
 					</div>
 					<div className='icon-text'>
 						<GenderAmbiguous className='icon'/>
-						<p><small>gender:</small></p>
+						<h6>gender:</h6>
 						<p className='text-muted'><small>{character.gender}</small></p>
 					</div>
 				</section>

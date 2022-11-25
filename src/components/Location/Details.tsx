@@ -56,17 +56,17 @@ export default function LocationDetails({location}: {location: ILocation}) {
 					<CardTitle tag='h4'>{location.name}</CardTitle>
 					<div className='icon-text'>
 						<GlobeAmericas className='icon'/>
-						<p><small>type:</small></p>
+						<h6>type:</h6>
 						<p className='text-muted'><small>{location.type}</small></p>
 					</div>
 					<div className='icon-text'>
 						<Bullseye className='icon'/>
-						<p><small>dimension:</small></p>
+						<h6>dimension:</h6>
 						<p className='text-muted'><small>{location.dimension}</small></p>
 					</div>
 					<div className='icon-text'>
 						<PersonCircle className='icon'/>
-						<p><small>residents:</small></p>
+						<h6>residents:</h6>
 						<p className='text-muted'><small>{location.residents.length}</small></p>
 					</div>
 				</section>

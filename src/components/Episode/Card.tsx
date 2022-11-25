@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TvFill, Calendar, PersonFill} from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
+import DashboardContext from '../../context/DashboardContext';
 import { IEpisode } from '../../interfaces/Episode/Episode';
 
 export default function EpisodeCard({episode}: {episode: IEpisode}) {
 	const navigate = useNavigate();
 
+	const {setType} = useContext(DashboardContext);
 
+	function clickCard(){
+		setType({
+			text:'Episode',
+			id: 3
+		});
+		navigate(`/dashboard/episodes/${episode.id}`);
+	}
 
 	return (
 		<Card
-			onClick={() => navigate(`/dashboard/episodes/${episode.id}`)}
+			onClick={clickCard}
 			className='custom-card card-episode'>
 			<CardBody>
 				<CardTitle><strong>{episode.name}</strong></CardTitle>

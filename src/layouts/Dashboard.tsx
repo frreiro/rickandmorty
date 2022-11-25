@@ -1,25 +1,25 @@
 import { Outlet } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useContext } from 'react';
 
 
 import { INavChoice } from '../interfaces/navbar';
 import ListContainer from '../components/ListContainer';
 import CustomNavbar from '../components/Dashboard/navbar';
+import DashboardContext from '../context/DashboardContext';
 
 
 export default function Dashboard(){
-	const [navChoice, setNavChoice] = useState<INavChoice>('Characters');
-	
+	const {type} = useContext(DashboardContext);
 
 	return (
 		<main className='app-container'>
 			<Card
 				body
 				className='dashboard-container'>
-				<CustomNavbar navState={{navChoice, setNavChoice}}/>
+				<CustomNavbar/>
 				<CardBody className='dashboard-body'>
-					<CardTitle tag="h1">{navChoice}</CardTitle>
+					<CardTitle tag="h1">{type.text}</CardTitle>
 					<ListContainer>
 						<Outlet/>
 					</ListContainer>

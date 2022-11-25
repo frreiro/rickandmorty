@@ -46,7 +46,7 @@ export default function Character() {
 		}
 	},[character]);
 
-
+	
 	return (
 		<>
 			{
@@ -60,7 +60,7 @@ export default function Character() {
 				<h3>Episodes:</h3>
 				<div className='list'>
 					{
-						Object.keys(episodes).length > 1 ?
+						Object.keys(episodes).length > 0 ?
 							episodes?.map((episode) => {
 								return <EpisodeCard 
 									key={episode.id}

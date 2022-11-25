@@ -11,7 +11,7 @@ import { ICharacterFilters } from '../interfaces/Character/request';
 
 
 export default function Characters() {
-	const [characters, setCharaters] = useState<ICharacter[]>([]);
+	const [characters, setCharacters] = useState<ICharacter[]>([]);
 	const pages = useRef<number>(0);
 
 	const query = useQuery();
@@ -26,7 +26,8 @@ export default function Characters() {
 		(async() => {
 			const charactersData = await getCharacters(filter);
 			pages.current = charactersData.info.pages;
-			setCharaters(charactersData.results);
+			console.log(charactersData.results);
+			setCharacters(charactersData.results);
 		})();
 
 	},[page]); 

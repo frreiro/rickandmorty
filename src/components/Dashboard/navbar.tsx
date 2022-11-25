@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {PersonFill, GeoAltFill, TvFill} from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
-import { ICustomNavBar, IItemNav, INavState } from '../../interfaces/navbar';
+import DashboardContext from '../../context/DashboardContext';
+import {  IItemNav, INavChoice } from '../../interfaces/navbar';
 
 
 
-export default function CustomNavbar({navState}: ICustomNavBar){
+export default function CustomNavbar(){
 	const navigate = useNavigate();
+	const {setType, type} = useContext(DashboardContext);
 
-	function setNavChoice(type: INavState['navChoice']){
-		navState.setNavChoice(type);
-		navigate(`/dashboard/${type.toLowerCase()}`);
+	function setNavChoice(type: IItemNav){
+		setType({
+			text: type.name,
+			id: type.id
+		});
+		navigate(`/dashboard/${type.name.toLowerCase()}?page=1`);
 	}
 
-	const itemNav: IItemNav[] = [{
-		name: 'Characters',
-		icon: <PersonFill className='icon'/>,
-	},
-	{
-		name: 'Locations',
-		icon: <GeoAltFill className='icon'/>,
+	const itemNav: IItemNav[] = [
+		{
+			id: 1,
+			name: 'Characters',
+			icon: <PersonFill className='icon'/>,
+		},
+		{
+			id: 2,
+			name: 'Locations',
+			icon: <GeoAltFill className='icon'/>,
 	
-	},
-	{
-		name: 'Episodes',
-		icon: <TvFill className='icon'/>,
-	}
+		},
+		{
+			id: 3,
+			name: 'Episodes',
+			icon: <TvFill className='icon'/>,
+		}
 	];
 
 	return (
@@ -36,8 +45,8 @@ export default function CustomNavbar({navState}: ICustomNavBar){
 						return (
 							<div 
 								key={item_nav.name} 
-								className={`nav-icon ${navState.navChoice === item_nav.name ? 'text-dark' : ''}`} 
-								onClick={() => setNavChoice(item_nav.name)}>
+								className={`nav-icon ${type.id === item_nav.id ? 'text-dark' : ''}`} 
+								onClick={() => setNavChoice(item_nav)}>
 								{item_nav.icon}
 								<p className='body '>
 									<small>{item_nav.name}</small>

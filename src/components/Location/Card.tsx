@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GeoAltFill, Hypnotize, Asterisk} from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle } from 'reactstrap';
+import DashboardContext from '../../context/DashboardContext';
 import { ILocation } from '../../interfaces/Location/Location';
 
 export default function LocationCard({location}: {location: ILocation}) {
 	const navigate = useNavigate();
 	
 
+	const {setType} = useContext(DashboardContext);
+
+	function clickCard(){
+		setType({
+			text:'Location',
+			id: 2
+		});
+		navigate(`/dashboard/locations/${location.id}`);
+	}
+
 	return (
 		<Card
-			onClick={() => navigate(`/dashboard/locations/${location.id}`)}
+			onClick={clickCard}
 			className='custom-card card-location'>
 			<CardBody>
 				<CardTitle><strong>{location.name}</strong></CardTitle>

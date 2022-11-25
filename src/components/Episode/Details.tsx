@@ -29,12 +29,12 @@ export default function EpisodeDetails({episode, characters}: {episode: IEpisode
 					<CardTitle tag='h4'>{episode.name}</CardTitle>
 					<div className='icon-text'>
 						<TvFill className='icon'/>
-						<p><small>episode:</small></p>
+						<h6>episode:</h6>
 						<p className='text-muted'><small>{episode.episode}</small></p>
 					</div>
 					<div className='icon-text'>
 						<GeoAltFill className='icon'/>
-						<p><small>release date:</small></p>
+						<h6>release date:</h6>
 						<p className='text-muted'><small>{episode.air_date}</small></p>
 					</div>
 				</section>
