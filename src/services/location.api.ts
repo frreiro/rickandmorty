@@ -18,8 +18,15 @@ async function getLocations(filter?: ILocationFilters): Promise<{info: IInfo, re
 	return response.data;
 }
 
+async function getLocationsByNumbers(locations: number[]): Promise<ILocation[]> {
+	const response = await fetchAxios.get(`/location/${locations}`);
+	return response.data;
+}
+
+
 
 export{
 	getLocations,
 	getSpecificLocation,
+	getLocationsByNumbers
 };
