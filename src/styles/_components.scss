@@ -9,14 +9,28 @@
 		margin-right: 5px;
 	}
 }
-
+.card.custom-card{
+	
+	@media(max-width: 700px){
+		
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		
+	}
+}
 
 .custom-card{
 	width: 200px;
-	height: 200px;
 	margin-right: 10px;
 	margin-bottom: 20px;
 	cursor: pointer;
+
+	img{
+		width: 200px;
+		height: 200px;
+	}
+
 
 	article{
 		display: flex;
@@ -27,7 +41,13 @@
 		line-height: 15px;
 	}
 	
-
+	@media(max-width: 700px){
+		
+		section{
+			margin-bottom: 10px
+		}
+		
+	}
 
 
 }
@@ -99,7 +119,7 @@
 .card-detail{
 	width: 100%;
 	flex-direction: row;
-
+	
 	.img{
 		width: 200px;
 		height: 100%;
@@ -112,6 +132,8 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		flex-wrap: wrap;
+
 
 		section{
 			display: flex;
@@ -131,7 +153,6 @@
 		.chart-container{
 			width: 60%;
 			text-align: center;
-			//background-color: blue;
 
 			.chart{
 				width: 100%;
@@ -139,6 +160,33 @@
 			}
 		}
 			
+	}
+
+
+	@media(max-width: 800px){
+
+
+		.card-body{
+
+			.card-title{
+				text-align: center;
+			}
+
+			section{
+				width: 100%;
+				div{
+					margin-bottom: 10px;
+				}
+			}
+
+			.chart-container{
+				width: 100%;
+
+				.chart{
+					width: 90%;
+				}
+			}
+		}
 	}
 }
 
