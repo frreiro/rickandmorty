@@ -64,7 +64,7 @@ export default function Episode() {
 			{
 				Object.keys(episode).length > 1 
 					?
-					<EpisodeDetails episode={episode}/>
+					<EpisodeDetails episode={episode} characters={characters}/>
 					:
 					<></>
 			}

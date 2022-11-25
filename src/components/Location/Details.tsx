@@ -47,14 +47,6 @@ export default function LocationDetails({location}: {location: ILocation}) {
 
 
 
-
-
-
-
-
-
-
-
 	
 	return (
 		<Card

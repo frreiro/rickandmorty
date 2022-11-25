@@ -7,11 +7,19 @@ import { PersonCircle, Bullseye, GlobeAmericas, TvFill, GeoAltFill } from 'react
 
 
 import { IEpisode } from '../../interfaces/Episode/Episode';
+import { ICharacter } from '../../interfaces/Character/character';
+import { Bar } from 'react-chartjs-2';
 
 
-export default function EpisodeDetails({episode}: {episode: IEpisode}) {
-
-
+export default function EpisodeDetails({episode, characters}: {episode: IEpisode, characters: ICharacter[]}) {
+	
+	function mapCharactersLastEpisodes(characters: ICharacter[], episode: IEpisode){
+		return characters?.filter((character) => {
+			if(character.episode.at(-1)?.endsWith(String(episode.id)) && character.status === 'Dead'){
+				return true;
+			}
+		});
+	}
 	
 	return (
 		<Card
@@ -31,26 +39,66 @@ export default function EpisodeDetails({episode}: {episode: IEpisode}) {
 					</div>
 				</section>
 
-				{/*<div className='chart-container'>
-					<CardTitle tag='h5' >Other dimensions</CardTitle>
+				<div className='chart-container'>
+					<CardTitle tag='h5' >{'Episode Death\'s'}</CardTitle>
 					<div className='chart'>
-						<Pie data={dataPie} 
-							options={{
-								maintainAspectRatio: false, 
-								plugins: {
-									legend: {
-										position:'bottom',
-										labels: {
-											usePointStyle: true,
-											boxHeight: 7,
+						{
+							characters.length > 0 ? 
+
+								<Bar data={{
+									labels: ['Deaths'],
+									datasets: [
+										{
+											data: [mapCharactersLastEpisodes(characters, episode).length],
+											backgroundColor: '#7749F8' ,
+										},
+									],
+								}} 
+								options={{
+									maintainAspectRatio: false, 
+									plugins: {
+										legend: {
+											display: false,
 										}		
-									}
-								}
-							}}
-						/>
+									},
+									indexAxis: 'y',
+									scales: {
+										x: {
+											stacked: true,
+											type:'linear', 
+											ticks: {
+												
+												
+												font: {
+													size: 8
+												},
+												callback(tickValue, index, ticks) {
+													if( Number(tickValue) % 1 === 0 ) return tickValue;
+												},	
+												
+											}
+
+										},
+										y:{
+											beginAtZero: true,
+											ticks: {
+
+												font: {
+													size: 8,
+													
+												},
+												
+											},
+										}
+									},
+								}}
+								/>
+
+								: <></>
+						}
 					</div>
 					
-				</div>*/}
+				</div>
 			</CardBody>
 		</Card>
 	);
