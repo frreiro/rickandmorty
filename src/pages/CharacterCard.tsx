@@ -8,6 +8,7 @@ import PaginationContainer from '../components/Pagination';
 import { ICharacter } from '../interfaces/Character/character';
 import { ICharacterFilters } from '../interfaces/Character/request';
 import CharactersFiltersContext from '../context/CharacterFilters';
+import {toast} from 'react-toastify';
 
 
 
@@ -27,9 +28,13 @@ export default function Characters() {
 			filter.page = Number(page);
 		}
 		(async() => {
-			const charactersData = await getCharacters(filter);
-			pages.current = charactersData.info.pages;
-			setCharacters(charactersData.results);
+			try{
+				const charactersData = await getCharacters(filter);
+				pages.current = charactersData.info.pages;
+				setCharacters(charactersData.results);
+			}catch(e){
+				toast.error('Could not find characters, try again');
+			}
 		})();
 
 	},[page,charactersFilters]); 

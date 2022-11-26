@@ -1,21 +1,27 @@
 import React from 'react';
-import '../styles/style.scss';
-import Dashboard from '../layouts/Dashboard';
+import { ToastContainer } from 'react-toastify';
 import {
 	BrowserRouter,
 	Routes,
 	Route,
 	Navigate
 } from 'react-router-dom';
-import Characters from '../pages/CharacterCard';
-import Locations from '../pages/LocationsCard';
+import '../styles/style.scss';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import Episodes from '../pages/EpisodesCard';
-import CharacterDetails from '../components/Character/Details';
-import Character from '../pages/Character/Character';
-import Location from '../pages/Location/Location';
+import Dashboard from '../layouts/Dashboard';
+import Locations from '../pages/LocationsCard';
 import Episode from '../pages/Episode/Episode';
+import Characters from '../pages/CharacterCard';
+import Location from '../pages/Location/Location';
+import Character from '../pages/Character/Character';
 import { DashboardProvider } from '../context/DashboardContext';
 import { CharactersFiltersProviders } from '../context/CharacterFilters';
+
+
+
 
 
 function App() {
@@ -34,13 +40,13 @@ function App() {
 							<Route path='episodes' element={<Episodes/>}/>
 							<Route path='episodes/:id' element={<Episode/>}/>
 
-
 						</Route>
 						<Route path='*' element={<Navigate to='/dashboard/characters'/>}/>
 
 					</Routes>
 				</BrowserRouter>		
 			</CharactersFiltersProviders>
+			<ToastContainer theme="dark"/>
 		</DashboardProvider>
 
 	);
