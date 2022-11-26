@@ -36,7 +36,7 @@ export default function Location() {
 
 
 	useEffect(() => {
-		if(Object.keys(location).length > 0){
+		if(Object.keys(location).length > 0 && location.residents.length > 0){
 			const charactersNumbers = location.residents.map((resident) => Number(resident.split('/').at(-1)));
 			(async() => {
 				const charactersData = await getCharacterByNumbers(charactersNumbers);
@@ -92,7 +92,7 @@ export default function Location() {
 				</section>
 				<section className='list'>
 					{
-						list === 'Residents' ? 
+						list === 'Residents' && characters.length > 0 ? 
 							Object.keys(characters).length > 0 ?
 								characters?.map((character) => {
 									if(status === 'All'){
