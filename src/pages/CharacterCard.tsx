@@ -6,7 +6,6 @@ import CharacterCard from '../components/Character/Card';
 import { getCharacters } from '../services/charactes.api';
 import PaginationContainer from '../components/Pagination';
 import { ICharacter } from '../interfaces/Character/character';
-import { ICharacterFilters } from '../interfaces/Character/request';
 import CharactersFiltersContext from '../context/CharacterFilters';
 import {toast} from 'react-toastify';
 
@@ -52,7 +51,9 @@ export default function Characters() {
 					/>;
 				})
 			}
-			<PaginationContainer pages={pages.current}/>
+			<PaginationContainer 
+				pages={pages.current}
+				pageName={'characters'}/>
 			
 		</>
 	);

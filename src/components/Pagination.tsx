@@ -4,13 +4,14 @@ import {useNavigate} from 'react-router-dom';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import { useQuery } from '../hooks/useQuery';
 
-export default function PaginationContainer({pages}:{pages:number}) {
+export default function PaginationContainer({pages, pageName}:{pages:number, pageName: string}) {
 	const navigate = useNavigate();
 	const query = useQuery();
 	const actualPage = Number(query.get('page'));
 
 	function checkNextPages(actualPage: number, pagesTotal: number){
 		const remainPages = [];
+		if(pagesTotal < 4) return Array.from({length: pagesTotal}, (v,k) => k + 1);
 		
 		if(actualPage > 1){
 			remainPages.push(actualPage - 1);
@@ -39,7 +40,7 @@ export default function PaginationContainer({pages}:{pages:number}) {
 
 	const pagesArr = checkNextPages(actualPage,pages);
 
-	return pages > 4 
+	return pages > 1
 		? (
 			<Pagination>
 				{
@@ -47,11 +48,11 @@ export default function PaginationContainer({pages}:{pages:number}) {
 						return (
 							actualPage === num
 								?
-								<PaginationItem key={num} active onClick={() => navigate(`/dashboard/characters?page=${String(num)}`)}>
+								<PaginationItem key={num} active onClick={() => navigate(`/dashboard/${pageName}?page=${String(num)}`)}>
 									<PaginationLink>{num}</PaginationLink>
 								</PaginationItem>						
 								:
-								<PaginationItem key={num} onClick={() => navigate(`/dashboard/characters?page=${String(num)}`)}>
+								<PaginationItem key={num} onClick={() => navigate(`/dashboard/${pageName}?page=${String(num)}`)}>
 									<PaginationLink>{num}</PaginationLink>
 								</PaginationItem>						
 						);
