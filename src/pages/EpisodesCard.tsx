@@ -34,19 +34,22 @@ export default function Episodes() {
 
 	return (
 		<>
-			{
-				episodes?.map((episode) => {
-					return <EpisodeCard 
-						key={episode.id}
-						episode={episode}
-					/>;
-				})
-			}
-
-			<PaginationContainer 
-				pages={pages.current} 
-				pageName={'episodes'}
-			/>
+			<main>
+				{
+					episodes?.map((episode) => {
+						return <EpisodeCard 
+							key={episode.id}
+							episode={episode}
+						/>;
+					})
+				}
+			</main>
+			<footer>
+				<PaginationContainer 
+					pages={pages.current} 
+					pageName={'episodes'}
+				/>
+			</footer>
 		</>
 	);
 }

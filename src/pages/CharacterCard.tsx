@@ -42,19 +42,23 @@ export default function Characters() {
 
 	return (
 		<>
+			<main>
 			
-			{
-				characters?.map((character) => {
-					return <CharacterCard 
-						key={character.id}
-						character={character}
-					/>;
-				})
-			}
-			<PaginationContainer 
-				pages={pages.current}
-				pageName={'characters'}/>
+				{
+					characters?.map((character) => {
+						return <CharacterCard 
+							key={character.id}
+							character={character}
+						/>;
+					})
+				}
 			
+			</main>
+			<footer>
+				<PaginationContainer 
+					pages={pages.current}
+					pageName={'characters'}/>
+			</footer>
 		</>
 	);
 }

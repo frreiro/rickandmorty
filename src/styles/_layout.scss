@@ -17,6 +17,7 @@
 		padding-bottom:20px ;
 	}
 
+
 }
 
 
@@ -48,9 +49,18 @@
 
 .container-list{
 	height: 90%;
-	display: flex;
-	justify-content: space-between;
-	padding-top: 10px;
-	flex-wrap: wrap;
 	overflow: scroll;
+
+	main{
+
+		display: flex;
+		justify-content: space-between;
+		padding-top: 10px;
+		flex-wrap: wrap;
+	}
+
+	footer{
+		display: flex;
+		justify-content: center;
+	}
 }

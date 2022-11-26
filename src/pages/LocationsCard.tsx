@@ -32,20 +32,24 @@ export default function Locations() {
 
 	return (
 		<>
-			{
-				locations?.map((location) => {
-					return <LocationCard 
-						key={location.id}
-						location={location}
-					/>;
+			<main>
+				{
+					locations?.map((location) => {
+						return <LocationCard 
+							key={location.id}
+							location={location}
+						/>;
 					
 					
-				})
-			}
-			<PaginationContainer 
-				pages={pages.current} 
-				pageName={'locations'}
-			/>
+					})
+				}
+			</main>
+			<footer>
+				<PaginationContainer 
+					pages={pages.current} 
+					pageName={'locations'}
+				/>
+			</footer>
 		</>
 	);
 }
