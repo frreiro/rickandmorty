@@ -6,7 +6,7 @@ import {
 	DropdownItem,
 } from 'reactstrap';
 
-export default function DropDownComponent({setValue, value, texts}: {setValue: any, value: any, texts: any[]}) {
+export default function DropDownComponent({setValue, texts, headerText}: {setValue: any, texts: string[], headerText:  string}) {
 	const [dropdownOpen, setDropdownOpen] = useState(false);
 
 	const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -14,7 +14,7 @@ export default function DropDownComponent({setValue, value, texts}: {setValue: a
 	return (
 		<div className='justify-content-center'>
 			<Dropdown isOpen={dropdownOpen} toggle={toggle} direction='down'>
-				<DropdownToggle caret color='primary'>{value}</DropdownToggle>
+				<DropdownToggle caret color='primary'>{headerText}</DropdownToggle>
 				<DropdownMenu>
 					{
 						texts.map((text,index) => {

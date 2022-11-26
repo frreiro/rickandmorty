@@ -7,8 +7,9 @@ import {  IItemNav } from '../../interfaces/navbar';
 
 
 export default function CustomNavbar(){
-	const navigate = useNavigate();
+
 	const {setType, type} = useContext(DashboardContext);
+	const navigate = useNavigate();
 
 	function setNavChoice(type: IItemNav){
 		setType({
@@ -55,6 +56,7 @@ export default function CustomNavbar(){
 						);
 					})
 				}
+
 
 			</div>
 		</>

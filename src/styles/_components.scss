@@ -206,6 +206,17 @@
 .list-detail{
 	width: 100%;
 
+
+	.dropdown-container{
+		width: 100%;
+		display: flex;
+
+		:first-child{
+			margin-right: 10px;
+		}
+	}
+
+
 	.list{
 		width: 100%;
 		display: flex;

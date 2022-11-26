@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Filter } from 'react-bootstrap-icons';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CharacterCard from '../../components/Character/Card';
 
@@ -71,7 +70,10 @@ export default function Episode() {
 
 			<div className='list-detail'>
 				<section>
-					<DropDownComponent setValue={setList} value={list} texts={['Characters', 'Locations']} />
+					<DropDownComponent 
+						setValue={setList}
+						texts={['Characters', 'Locations']} 
+						headerText={'Filter'}/>
 				</section>
 				<section className='list'>
 					{

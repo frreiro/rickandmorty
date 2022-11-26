@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CharacterCard from '../../components/Character/Card';
 import DropDownComponent from '../../components/Dropdown';
@@ -20,6 +20,7 @@ export default function Location() {
 	const [characters, setCharacters] = useState<ICharacter[]>([] as ICharacter[]);
 	const [episodes, setEpisodes] = useState<IEpisode[]>([] as IEpisode[]);
 	const [list, setList] = useState<'Residents'| 'Episodes'>('Residents');
+	const [status, setStatus] = useState<'Alive'|'Dead'|'Unknown'|'All'>('All');
 	
 	
 	const {id} = useParams();
@@ -74,18 +75,33 @@ export default function Location() {
 			}
 
 			<div className='list-detail'>
-				<section>
-					<DropDownComponent setValue={setList} value={list} texts={['Residents', 'Episodes']} />
+				<section className='dropdown-container'>
+					<DropDownComponent setValue={setList} texts={['Residents', 'Episodes']} headerText={'Filter'}/>
+					{
+						list === 'Residents' 
+							? <DropDownComponent setValue={setStatus} texts={['All','Alive', 'Dead', 'Unknown']} headerText={'Status'}/>
+							: <></>
+
+					}
 				</section>
 				<section className='list'>
 					{
 						list === 'Residents' ? 
 							Object.keys(characters).length > 0 ?
 								characters?.map((character) => {
-									return <CharacterCard 
-										key={character.id}
-										character={character}
-									/>;
+									if(status === 'All'){
+										return <CharacterCard 
+											key={character.id}
+											character={character}
+										/>;
+									}else{
+										if(character.status === status){
+											return <CharacterCard 
+												key={character.id}
+												character={character}
+											/>;
+										}
+									}
 								})
 								: 
 								<></>

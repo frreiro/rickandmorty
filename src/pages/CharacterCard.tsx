@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 
 import { useQuery } from '../hooks/useQuery';
@@ -7,6 +7,7 @@ import { getCharacters } from '../services/charactes.api';
 import PaginationContainer from '../components/Pagination';
 import { ICharacter } from '../interfaces/Character/character';
 import { ICharacterFilters } from '../interfaces/Character/request';
+import CharactersFiltersContext from '../context/CharacterFilters';
 
 
 
@@ -15,12 +16,14 @@ export default function Characters() {
 	const pages = useRef<number>(0);
 
 	const query = useQuery();
+	const {charactersFilters, setCharactersFilters} = useContext(CharactersFiltersContext);
 	const page = query.get('page');
 
 
 	useEffect(() => {
-		const filter = {} as ICharacterFilters;
+		const filter = {...charactersFilters};
 		if(page){
+			
 			filter.page = Number(page);
 		}
 		(async() => {
@@ -29,7 +32,7 @@ export default function Characters() {
 			setCharacters(charactersData.results);
 		})();
 
-	},[page]); 
+	},[page,charactersFilters]); 
 
 
 
