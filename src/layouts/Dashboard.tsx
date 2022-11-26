@@ -27,6 +27,15 @@ export default function Dashboard(){
 		}
 	}
 
+	function selectSpeciesCharacter(species:  ICharacterFilters['species']| 'All'){
+		if(species == 'All') {
+			const {species , ...filters} = charactersFilters;
+			setCharactersFilters({...filters,page: 1} );
+		}else{
+			setCharactersFilters({...charactersFilters, species: species, page: 1} );
+		}
+	}
+
 	return (
 		<main className='app-container'>
 			<Card
@@ -38,11 +47,19 @@ export default function Dashboard(){
 						<CardTitle tag="h1">{type.text}</CardTitle>
 						{
 							type.id === 1 
-								? <DropDownComponent 
-									setValue={selectStatusCharacter} 
-									texts={['All','Alive', 'Dead' , 'Unknown']}
-									headerText={'Filter'}
-								/>
+								? 
+								<div className='dropdown-container'>
+									<DropDownComponent 
+										setValue={selectStatusCharacter} 
+										texts={['All','Alive', 'Dead' , 'Unknown']}
+										headerText={charactersFilters.status && charactersFilters.status  !== 'All' ? charactersFilters.status : 'Status'}
+									/>
+									<DropDownComponent 
+										setValue={selectSpeciesCharacter} 
+										texts={['All','Human', 'Alien' , 'Mythological Creature', 'Disease', 'Robot',  'Unknown', 'Animal', 'Cronenberg', 'Humanoid', 'Poopybutthole', ]}
+										headerText={ charactersFilters.species && charactersFilters.species !== 'All' ? charactersFilters.species : 'Species'}
+									/>
+								</div>
 								: <></>
 
 						}

@@ -209,11 +209,8 @@
 
 	.dropdown-container{
 		width: 100%;
-		display: flex;
 
-		:first-child{
-			margin-right: 10px;
-		}
+		
 	}
 
 
@@ -224,4 +221,15 @@
 		margin-top: 10px;
 		justify-content: space-between
 	}
+}
+
+
+.dropdown-container{
+	//width: 100%;
+	display: flex;
+
+	:first-child{
+		margin-right: 10px;
+	}
+
 }

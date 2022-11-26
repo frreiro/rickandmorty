@@ -76,10 +76,16 @@ export default function Location() {
 
 			<div className='list-detail'>
 				<section className='dropdown-container'>
-					<DropDownComponent setValue={setList} texts={['Residents', 'Episodes']} headerText={'Filter'}/>
+					<DropDownComponent 
+						setValue={setList} 
+						texts={['Residents', 'Episodes']}
+						headerText={list}/>
 					{
 						list === 'Residents' 
-							? <DropDownComponent setValue={setStatus} texts={['All','Alive', 'Dead', 'Unknown']} headerText={'Status'}/>
+							? <DropDownComponent 
+								setValue={setStatus} 
+								texts={['All','Alive', 'Dead', 'Unknown']} 
+								headerText={status && status !== 'All' ? status : 'Status'}/>
 							: <></>
 
 					}

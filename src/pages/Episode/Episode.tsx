@@ -20,6 +20,8 @@ export default function Episode() {
 	const [characters, setCharacters] = useState<ICharacter[]>({} as ICharacter[]);
 	const [locations, setLocations] = useState<ILocation[]>({} as ILocation[]);
 	const [list, setList] = useState<'Characters'| 'Locations'>('Characters');
+	const [status, setStatus] = useState<'Alive'|'Dead'|'Unknown'|'All'>('All');
+
 	
 	const {id} = useParams();
 	
@@ -69,21 +71,39 @@ export default function Episode() {
 			}
 
 			<div className='list-detail'>
-				<section>
+				<section className='dropdown-container'>
 					<DropDownComponent 
 						setValue={setList}
 						texts={['Characters', 'Locations']} 
-						headerText={'Filter'}/>
+						headerText={list}/>
+					{
+						list === 'Characters' 
+							? <DropDownComponent 
+								setValue={setStatus} 
+								texts={['All','Alive', 'Dead', 'Unknown']} 
+								headerText={status && status !== 'All' ? status : 'Status'}/>
+							: <></>
+
+					}
 				</section>
 				<section className='list'>
 					{
 						list === 'Characters' ? 
 							Object.keys(characters).length > 1 ?
 								characters?.map((character) => {
-									return <CharacterCard 
-										key={character.id}
-										character={character}
-									/>;
+									if(status === 'All'){
+										return <CharacterCard 
+											key={character.id}
+											character={character}
+										/>;
+									}else{
+										if(character.status === status){
+											return <CharacterCard 
+												key={character.id}
+												character={character}
+											/>;
+										}
+									}
 								})
 								: <></>
 
