@@ -75,9 +75,9 @@ $ yarn run start
 ## 🎨 Screenshots
 
 <p align="center">
-    <img height='400px' src="https://user-images.githubusercontent.com/98192816/204068873-dec3b012-6b74-4cda-9552-0dcc35f0bc47.png">
-    <img height='400px'src="https://user-images.githubusercontent.com/98192816/204068879-65f10737-4857-46f9-9634-62887d8646b1.png">
-    <img height='400px'src="https://user-images.githubusercontent.com/98192816/204068877-27679e80-0245-43b8-81d9-9b90e5e5ebec.png">
+    <img height='300px' src="https://user-images.githubusercontent.com/98192816/204068873-dec3b012-6b74-4cda-9552-0dcc35f0bc47.png">
+    <img height='300px'src="https://user-images.githubusercontent.com/98192816/204068879-65f10737-4857-46f9-9634-62887d8646b1.png">
+    <img height='300px'src="https://user-images.githubusercontent.com/98192816/204068877-27679e80-0245-43b8-81d9-9b90e5e5ebec.png">
 
 
 </p><br>
